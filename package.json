@@ -1,0 +1,21 @@
+{
+  "name": "tbilisi-dub-lab",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.9.0",
+    "@nuxt/image": "^2.0.0",
+    "@nuxtjs/i18n": "^10.2.1",
+    "better-sqlite3": "^12.5.0",
+    "nuxt": "^4.2.1",
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.3"
+  }
+}

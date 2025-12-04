@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+# General rules
+- use Nuxt for frontend
+- use CSS, no tailwind
+- add all key updates during the development of the app to creation-log.md file
+- keep all rules for agents aligned in general.mdc, .cursorrules and claude.md files
+- use English or Georgian in website UI. No any other languages allowed

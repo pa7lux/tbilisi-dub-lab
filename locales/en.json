@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "home": "Home",
+    "logo": "Tbilisi Dub Lab"
+  },
+  "footer": {
+    "copyright": "All rights reserved"
+  },
+  "lang": {
+    "switch": "Switch language",
+    "current": "English"
+  }
+}
+
