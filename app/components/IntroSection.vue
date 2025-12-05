@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const isDonateOpen = ref(false)
+const isContactOpen = ref(false)
+
+const openDonate = () => {
+  isDonateOpen.value = true
+}
+
+const closeDonate = () => {
+  isDonateOpen.value = false
+}
+
+const openContact = () => {
+  isContactOpen.value = true
+}
+
+const closeContact = () => {
+  isContactOpen.value = false
+}
+</script>
+
 <template>
   <section class="intro-section">
     <div class="intro-content">
@@ -7,10 +30,30 @@
       </div>
       
       <div class="intro-buttons">
-        <a :href="$t('intro.donateUrl')" class="intro-btn intro-btn--green">{{ $t('intro.donateText') }}</a>
-        <a :href="$t('intro.contactUrl')" class="intro-btn intro-btn--yellow">{{ $t('intro.contactText') }}</a>
+        <button @click="openDonate" class="intro-btn intro-btn--green">
+          {{ $t('intro.donateText') }}
+        </button>
+        <button @click="openContact" class="intro-btn intro-btn--yellow">
+          {{ $t('intro.contactText') }}
+        </button>
       </div>
     </div>
+
+    <!-- Donate Overlay - slides from left -->
+    <Overlay :is-open="isDonateOpen" direction="left" @close="closeDonate">
+      <div class="overlay-text">
+        <h2>{{ $t('intro.donateText') }}</h2>
+        <p>{{ $t('intro.donatePlaceholder') }}</p>
+      </div>
+    </Overlay>
+
+    <!-- Contact Overlay - slides from right -->
+    <Overlay :is-open="isContactOpen" direction="right" @close="closeContact">
+      <div class="overlay-text">
+        <h2>{{ $t('intro.contactText') }}</h2>
+        <p>{{ $t('intro.contactPlaceholder') }}</p>
+      </div>
+    </Overlay>
   </section>
 </template>
 
@@ -147,6 +190,26 @@
     font-size: var(--btn-font-size-mobile);
     padding: var(--btn-padding-mobile);
   }
+}
+
+/* Overlay content styles */
+.overlay-text {
+  color: var(--color-white);
+}
+
+.overlay-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 8vw, 8rem);
+  margin: 0 0 2rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.overlay-text p {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.5;
+  margin: 0;
 }
 </style>
 

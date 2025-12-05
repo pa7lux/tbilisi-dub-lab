@@ -2,15 +2,35 @@
 
 ## [2024-12-05] - Georgian Layout: Vertical on All Desktop Screens
 
+### Added
+- **Overlay.vue**: New component for sliding panels
+  - Accepts `isOpen` (boolean) and `direction` ('left' | 'right') props
+  - Emits `close` event
+  - Slides from left or right based on direction
+  - Blocks page scroll when open
+  - Click outside or Escape key closes overlay
+  - Responsive widths: 33.33% (desktop >1200px), 50% (tablet 769-1200px), 100% (mobile ≤768px)
+  - Dark background with close button (✕)
+  - Smooth CSS transitions with cubic-bezier easing
+
 ### Changed
-- **AppFooter.vue**: Changed Facebook link text color from white to dark
-- Variable `--link-yellow-color` changed from `var(--color-white)` to `var(--color-dark)`
-- Better contrast on yellow background for improved readability
+- **IntroSection.vue**: Integrated Overlay component
+  - Changed "donate" and "contact" from links to buttons
+  - "donate" button opens overlay from left
+  - "contact" button opens overlay from right
+  - Added placeholder content in overlays
+
+- **i18n locales**: Added overlay translations
+  - `overlay.close`: "Close" / "დახურვა"
+  - `intro.donatePlaceholder`: Placeholder for donation info
+  - `intro.contactPlaceholder`: Placeholder for contact form
 
 ### Result
-- Facebook link now has dark text on yellow background
-- Improved visual contrast and accessibility
-- Consistent with standard design patterns for yellow backgrounds
+- Interactive overlays slide from sides when buttons are clicked
+- User-friendly close functionality (button, outside click, Escape key)
+- Page scroll blocked when overlay is open
+- Responsive design adapts to all screen sizes
+- Ready for future content integration (donation form, contact form)
 
 ---
 

@@ -21,8 +21,10 @@
     "paragraph2": "We have launched a Dub Fund to support musicians. We have a team of producers who help to prepare releases. And we are opened for new residents and partners.",
     "donateText": "donate",
     "donateUrl": "#donate",
+    "donatePlaceholder": "Donation information will be available here soon.",
     "contactText": "contact",
-    "contactUrl": "#contact"
+    "contactUrl": "#contact",
+    "contactPlaceholder": "Contact form will be available here soon."
   },
   "footer": {
     "title": "FOLLOW",
@@ -36,6 +38,9 @@
   "lang": {
     "switch": "Switch language",
     "current": "English"
+  },
+  "overlay": {
+    "close": "Close"
   }
 }
 
