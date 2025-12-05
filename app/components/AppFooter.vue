@@ -5,19 +5,19 @@ const socialLinks = [
   {
     nameKey: 'footer.instagram',
     platform: 'instagram',
-    url: 'https://instagram.com/tbilisidublab',
+    url: 'https://www.instagram.com/tbilisi_dub_lab/',
     color: 'red'
   },
   {
     nameKey: 'footer.facebook',
     platform: 'facebook',
-    url: 'https://facebook.com/tbilisidublab',
+    url: 'https://www.facebook.com/tbilisi.dub.lab',
     color: 'yellow'
   },
   {
     nameKey: 'footer.tiktok',
     platform: 'tiktok',
-    url: 'https://tiktok.com/@tbilisidublab',
+    url: 'https://www.tiktok.com/@tbilisi_dub_lab',
     color: 'green'
   }
 ]
