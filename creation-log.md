@@ -1,5 +1,69 @@
 # Creation Log
 
+## [2024-12-05] - SEO: Meta Tags, Favicons, and Open Graph
+
+### Added
+- **nuxt.config.ts**: Complete SEO setup in `app.head` section
+  - Basic meta tags: charset, viewport, format-detection, theme-color
+  - Open Graph tags: site_name, type, url, title, description, image (1200×630)
+  - Twitter Card tags: card type, site, title, description, image
+  - Favicons: SVG, PNG 32×32, PNG 16×16
+  - Canonical URL: https://dub.ge
+  - All OG image references point to: https://dub.ge/og.jpg
+  - HTML lang attribute set to 'en' by default
+
+- **useI18nMeta.ts**: Composable for dynamic i18n meta tags
+  - Updates meta tags when language changes
+  - Syncs: title, description, OG tags, Twitter tags, canonical URL
+  - Updates html lang attribute based on current locale
+  - Watches locale changes and updates automatically
+
+- **i18n translations**: Added `meta` section to both locales
+  - `meta.title`: SEO-optimized page title for both languages
+  - `meta.description`: Concise description for search engines
+  - English: "Supporting Reggae, Dub and Roots Culture in Georgia"
+  - Georgian: "რეგეის, დაბის და რუტს კულტურის მხარდაჭერა საქართველოში"
+
+### Changed
+- **app.vue**: Now uses `useI18nMeta()` composable
+  - Removed manual html lang attribute management
+  - All meta tags now managed by composable
+  - Automatic updates on language switch
+
+### Files
+- Favicons expected in `/public/`:
+  - `favicon.svg` - scalable vector favicon
+  - `favicon-32.png` - 32×32 PNG favicon
+  - `favicon-16.png` - 16×16 PNG favicon
+- Social image: `public/og.jpg` - 1200×630 OG image
+
+### Result
+- Complete SEO meta tags for search engines
+- Social media preview with custom OG image
+- Twitter Card support for better link previews
+- Dynamic meta tags that change with language
+- All favicons properly configured
+- Canonical URLs for better SEO
+
+---
+
+## [2024-12-05] - Overlay: Increased Desktop Width
+
+### Changed
+- **Overlay.vue**: Increased desktop overlay width
+  - Desktop (>1200px): width changed from 33.333% to 42%
+  - Now between 1/3 and 1/2 of screen width
+  - Better fit for long titles, especially Georgian text
+  - Tablet (769px-1200px): remains 50%
+  - Mobile (≤768px): remains 100%
+
+### Result
+- Overlay panels are wider on large desktops
+- Better readability and content fit
+- Long titles like "დაგვიკავშირდით" display more comfortably
+
+---
+
 ## [2024-12-05] - ContactForm: Google Apps Script Integration
 
 ### Added

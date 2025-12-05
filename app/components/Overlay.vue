@@ -83,7 +83,7 @@ watch(() => props.isOpen, (isOpen) => {
   --backdrop-z-index: 9999;
   
   --panel-bg: var(--color-dark);
-  --panel-width-desktop: 33.333%;
+  --panel-width-desktop: 42%;
   --panel-width-tablet: 50%;
   --panel-width-mobile: 100%;
   --panel-padding: 4rem 2rem;
