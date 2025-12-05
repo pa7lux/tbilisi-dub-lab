@@ -1,5 +1,25 @@
 # Creation Log
 
+## [2024-12-05] - Node.js Version Update for Netlify Compatibility
+
+### Changed
+- **.nvmrc**: Updated Node.js version from 24.11.1 to 22.12.0
+  - Reason: Netlify build environment uses Node.js 22
+  - Version 24.11.1 was causing build failures on Netlify
+  - Node.js 22 is LTS (Long Term Support) and fully compatible with Nuxt 4.2.1
+
+### Impact
+- Local development: Developers need to switch to Node.js 22.12.0 using `nvm install 22.12.0 && nvm use`
+- Production: Netlify builds now use matching Node.js version
+- Compatibility: All dependencies (Nuxt 4.2.1, Vue 3.5.25, Vite 7.2.6) fully support Node.js 22
+
+### Result
+- Build process now consistent between local and production environments
+- No version mismatch issues on Netlify
+- Stable LTS version for long-term maintenance
+
+---
+
 ## [2024-12-05] - PostHog Analytics Integration
 
 ### Added
