@@ -28,7 +28,7 @@ const { t } = useI18n()
   /* Title sizes */
   --hero-title-size-desktop: clamp(10rem, 22vw, 22rem);
   --hero-title-size-tablet: clamp(8rem, 20vw, 18rem);
-  --hero-title-size-mobile: clamp(6rem, 18vw, 14rem);
+  --hero-title-size-mobile: clamp(4rem, 16vw, 12rem);
   --hero-title-line-height-desktop: 0.9;
   --hero-title-line-height-mobile: 1;
   --hero-title-letter-spacing: 0.05em;
@@ -38,10 +38,10 @@ const { t } = useI18n()
   /* Tag sizes */
   --hero-tag-size-desktop: clamp(4rem, 6vw, 6rem);
   --hero-tag-size-tablet: clamp(2rem, 5vw, 4rem);
-  --hero-tag-size-mobile: clamp(1.8rem, 5vw, 3rem);
+  --hero-tag-size-mobile: clamp(1.5rem, 4.5vw, 2.5rem);
   --hero-tag-padding-desktop: 0.5rem 2.5rem;
   --hero-tag-padding-tablet: 1rem 3rem;
-  --hero-tag-padding-mobile: 0.75rem 2rem;
+  --hero-tag-padding-mobile: 0.5rem 1.5rem;
   --hero-tag-letter-spacing: 0.02em;
   
   /* Tag transforms */
@@ -201,6 +201,56 @@ const { t } = useI18n()
   }
 }
 
+/* Georgian language: apply 1024px breakpoint layout on ALL screen sizes */
+html[lang="ka"] .hero-content,
+html[lang="ka-GE"] .hero-content {
+  grid-template-columns: min-content min-content 1fr;
+  grid-template-rows: auto auto auto auto auto;
+  gap: var(--hero-content-gap-tablet);
+  align-items: start;
+  justify-items: start;
+}
+
+html[lang="ka"] .hero-title,
+html[lang="ka-GE"] .hero-title {
+  grid-row: 1;
+  grid-column: 1 / 3;
+}
+
+html[lang="ka"] .hero-subtitle,
+html[lang="ka-GE"] .hero-subtitle {
+  grid-row: 2;
+  grid-column: 1 / 3;
+}
+
+html[lang="ka"] .hero-center,
+html[lang="ka-GE"] .hero-center {
+  grid-row: 1 / 3;
+  grid-column: 3;
+  align-self: center;
+  justify-self: center;
+}
+
+html[lang="ka"] .hero-tag--green,
+html[lang="ka-GE"] .hero-tag--green {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+html[lang="ka"] .hero-tag--yellow,
+html[lang="ka-GE"] .hero-tag--yellow {
+  grid-row: 4;
+  grid-column: 1;
+  transform: none;
+}
+
+html[lang="ka"] .hero-tag--red,
+html[lang="ka-GE"] .hero-tag--red {
+  grid-row: 5;
+  grid-column: 1;
+  transform: none;
+}
+
 @media (max-width: 1024px) {
   .hero-content {
     grid-template-columns: min-content min-content 1fr;
@@ -254,7 +304,6 @@ const { t } = useI18n()
     width: 100%;
     letter-spacing: var(--hero-title-letter-spacing);
     line-height: var(--hero-title-line-height-mobile);
-    white-space: normal;
     font-weight: normal;
     margin: 0;
   }
@@ -292,7 +341,6 @@ const { t } = useI18n()
     font-size: var(--hero-title-size-mobile);
     letter-spacing: var(--hero-title-letter-spacing);
     line-height: var(--hero-title-line-height-mobile);
-    white-space: normal;
     font-weight: normal;
     margin: 0;
   }

@@ -26,6 +26,8 @@
   },
   "footer": {
     "title": "FOLLOW",
+    "subtitlePrefix": "Feel free to text us",
+    "email": "hi{'@'}dub.ge",
     "copyright": "All rights reserved",
     "instagram": "instagram",
     "facebook": "facebook",

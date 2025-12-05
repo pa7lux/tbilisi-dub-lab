@@ -5,8 +5,8 @@
     "menu": "მენიუ"
   },
   "hero": {
-    "title": "თბილისი",
-    "subtitle": "დაბ ლაბი",
+    "title": "TBILISI",
+    "subtitle": "DUB LAB",
     "tagGreen": "ჩვენ ვეხმარებით",
     "tagYellow": "მუსიკას",
     "tagRed": "ხდებოდეს",
@@ -25,7 +25,9 @@
     "contactUrl": "#contact"
   },
   "footer": {
-    "title": "გამოგვყევით",
+    "title": "FOLLOW",
+    "subtitlePrefix": "მოგვწერეთ",
+    "email": "hi{'@'}dub.ge",
     "copyright": "ყველა უფლება დაცულია",
     "instagram": "instagram",
     "facebook": "facebook",

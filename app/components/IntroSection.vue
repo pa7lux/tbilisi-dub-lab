@@ -26,15 +26,20 @@
   --content-gap: 3rem;
   
   --text-gap: 2rem;
-  --text-font-size: clamp(2.5rem, 4vw, 5rem);
+  --text-font-size: clamp(1.8rem, 4vw, 5rem);
   --text-line-height: 1.5;
   --text-color: var(--color-white);
   --text-margin: 0 0 2rem 0;
   
   --buttons-gap: 2rem;
   
-  --btn-font-size: clamp(2rem, 3vw, 4rem);
-  --btn-padding: 2rem 5rem;
+  --btn-font-size: clamp(3rem, 5vw, 5rem);
+  --btn-font-size-tablet: clamp(2rem, 5vw, 4rem);
+  --btn-font-size-mobile: clamp(1.5rem, 4.5vw, 2.5rem);
+  --btn-padding: 0.5rem 2.5rem;
+  --btn-padding-tablet: 1rem 3rem;
+  --btn-padding-mobile: 0.5rem 1.5rem;
+  --btn-letter-spacing: 0.02em;
   --btn-transition: all 0.2s;
   --btn-hover-offset: -2px;
   --btn-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -90,12 +95,17 @@
   font-family: var(--font-body);
   font-size: var(--btn-font-size);
   padding: var(--btn-padding);
+  letter-spacing: var(--btn-letter-spacing);
+  line-height: 1;
   border: none;
   cursor: pointer;
   transition: var(--btn-transition);
   font-weight: normal;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .intro-btn:hover {
@@ -121,10 +131,21 @@
   
   .intro-buttons {
     flex-direction: column;
+    align-items: stretch;
   }
   
   .intro-btn {
+    font-size: var(--btn-font-size-tablet);
+    padding: var(--btn-padding-tablet);
     width: 100%;
+  }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .intro-btn {
+    font-size: var(--btn-font-size-mobile);
+    padding: var(--btn-padding-mobile);
   }
 }
 </style>

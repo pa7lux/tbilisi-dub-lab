@@ -56,8 +56,8 @@ const toggleMenu = () => {
   
   --controls-gap: 1rem;
   
-  --flag-size: 2rem;
-  --flag-padding: 0.25rem;
+  --flag-size: 1.8rem;
+  --flag-padding: 0.2rem;
   --flag-opacity-default: 1;
   --flag-opacity-active: 0.4;
   --flag-scale-hover: 1.1;

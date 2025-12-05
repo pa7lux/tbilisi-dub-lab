@@ -8,7 +8,7 @@ body {
   padding: 0;
   font-family: var(--font-body);
   color: #333;
-  background-color: #fff;
+  background-color: var(--color-dark);
   line-height: 1.6;
   min-width: 360px;
 }

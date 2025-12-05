@@ -1,5 +1,110 @@
 # Creation Log
 
+## [2024-12-05] - Georgian Layout: Vertical on All Desktop Screens
+
+### Changed
+- **main.css**: Removed Georgian-specific word wrapping rules
+- **Hero.vue**: Removed `white-space: normal` from mobile responsive styles
+- All text (Georgian and English) now follows `white-space: nowrap` behavior
+- Tags, buttons, and links will not wrap to multiple lines
+
+### Result
+- All texts maintain single-line display regardless of language
+- Georgian texts no longer wrap, ensuring consistent design
+- Better visual consistency across all components and languages
+
+---
+
+## [2024-12-05] - Changed Georgian Font to ALK Sanet + Allow Word Wrapping
+
+### Changed
+- **variables.css**: Changed Georgian font to 'ALK Sanet'
+- Font file: `public/fonts/alk-sanet.woff`
+- Variable `--font-body-ka` now uses 'ALK Sanet'
+- Font changed from: MChNeobau → Mersad → ALK Sanet
+
+### Added
+- **main.css**: Georgian language specific CSS rules
+- For Georgian text (`html[lang="ka"]`), override `white-space: nowrap` to `normal`
+- Applies to: hero tags, buttons, and social links
+- **Exception**: hero-subtitle (DUB LAB) NEVER wraps in any language
+- Allows Georgian words to wrap naturally while keeping "DUB LAB" on one line
+
+---
+
+## [2024-12-05] - Added Contact Email to Footer (as clickable link)
+
+### Added
+- **Footer subtitle with email link**: "Feel free to text us hi@dub.ge" (EN) / "მოგვწერეთ hi@dub.ge" (KA)
+- Added to i18n: `footer.subtitlePrefix` and `footer.email` in both language files
+- Email is now a clickable `mailto:` link
+- New CSS variables:
+  - `--subtitle-font-size: clamp(1rem, 2vw, 1.5rem)`
+  - `--email-color: var(--color-yellow)` - yellow color for email
+  - `--email-color-hover: var(--color-white)` - white on hover
+  - `--email-transition: color 0.2s`
+- Positioned directly under the "FOLLOW" title
+
+### Changed
+- **AppFooter.vue**: `.footer-left` now uses `flex-direction: column` to stack title and subtitle
+- Email address wrapped in `<a>` tag with `mailto:` link
+- Added `.footer-email` styles with hover effect (yellow → white)
+- Email escaping: `{\'@\'}` is replaced with `@` in template
+
+---
+
+## [2024-12-05] - Optimized for 360px Minimum Width
+
+### Changed
+- **main.css**: Changed `min-width` from 500px to 360px
+- **Hero.vue**: 
+  - Title mobile: `clamp(4rem, 16vw, 12rem)` (was 6rem-14rem)
+  - Tags mobile (≤480px): Font `clamp(1.5rem, 4.5vw, 2.5rem)`, Padding `0.5rem 1.5rem`
+- **IntroSection.vue**:
+  - Text: `clamp(1.8rem, 4vw, 5rem)` (was 2.5rem-5rem)
+  - Buttons mobile (≤480px): Font `clamp(1.5rem, 4.5vw, 2.5rem)`, Padding `0.5rem 1.5rem`
+- **AppFooter.vue**:
+  - Title: `clamp(4rem, 20vw, 22rem)` (was 10rem-22rem)
+  - Links mobile (≤480px): Font `clamp(1.5rem, 4.5vw, 2.5rem)`, Padding `0.5rem 1.5rem`
+- **AppHeader.vue**:
+  - Flags: Size `1.8rem` (was 2rem), Padding `0.2rem` (was 0.25rem)
+
+### Result
+- Site now fits perfectly on 360px wide screens
+- All text and buttons are readable and accessible
+- Reduced padding and font sizes for very narrow screens
+- Consistent scaling across all components
+
+---
+
+## [2024-12-05] - Unified Button/Link Styling + Mobile Full Width + Matching Sizes
+
+### Changed
+- **IntroSection.vue**: Buttons styling
+  - Desktop: Font `clamp(3rem, 5vw, 5rem)`, Padding `0.5rem 2.5rem`
+  - Tablet (≤768px): Font `clamp(2rem, 5vw, 4rem)`, Padding `1rem 3rem`, Width `100%`
+  - Mobile (≤480px): Font `clamp(1.8rem, 5vw, 3rem)`, Padding `0.75rem 2rem`, Width `100%`
+  - Added: `white-space: nowrap`, `letter-spacing: 0.02em`, `line-height: 1`
+  - Desktop: `display: inline-flex` (width adjusts to content)
+
+- **AppFooter.vue**: Social links styling
+  - Desktop: Font `clamp(4rem, 6vw, 6rem)`, Padding `0.5rem 2.5rem`
+  - Tablet (≤768px): Font `clamp(2rem, 5vw, 4rem)`, Padding `1rem 3rem`, Width `100%`
+  - Mobile (≤480px): Font `clamp(1.8rem, 5vw, 3rem)`, Padding `0.75rem 2rem`, Width `100%`
+  - Added: `white-space: nowrap`, `letter-spacing: 0.02em`, `line-height: 1`
+  - Desktop/Tablet (>768px): `display: inline-flex` (width adjusts to content)
+
+- **Hero.vue**: Tags already had matching mobile sizing ✅
+
+### Result
+- Desktop/Tablet (>768px): buttons/links adjust width to content
+- Mobile (≤768px): all buttons/links are full-width with SAME sizes as Hero tags
+- All components use identical breakpoints and sizing on mobile
+- Consistent visual appearance across ALL interactive elements
+- Text never wraps on any screen size
+
+---
+
 ## [2024-12-05] - Refactored All Components: CSS Variables for Sizes and Colors
 
 ### Changed

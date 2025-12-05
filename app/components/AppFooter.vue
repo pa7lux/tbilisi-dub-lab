@@ -23,6 +23,12 @@ const socialLinks = [
     <div class="footer-content">
       <div class="footer-left">
         <h2 class="footer-title">{{ $t('footer.title') }}</h2>
+        <p class="footer-subtitle">
+          {{ $t('footer.subtitlePrefix') }} 
+          <a :href="`mailto:${$t('footer.email').replace('{\'@\'}', '@')}`" class="footer-email">
+            {{ $t('footer.email').replace('{\'@\'}', '@') }}
+          </a>
+        </p>
       </div>
       
       <div class="footer-right">
@@ -50,21 +56,34 @@ const socialLinks = [
   --footer-padding-mobile: 3rem 1.5rem;
   
   --content-max-width: 1600px;
-  --content-gap: 4rem;
-  --content-gap-tablet: 3rem;
-  --content-grid-columns: 1fr auto;
+  --content-gap: 1rem;
+  --content-gap-tablet: 0.5rem;
+  --content-grid-columns: min-content auto;
   --content-grid-columns-tablet: 1fr;
   
-  --title-font-size: clamp(4rem, 10vw, 10rem);
+  --title-font-size: clamp(4rem, 20vw, 22rem);
   --title-color: var(--color-white);
   --title-line-height: 0.9;
   --title-letter-spacing: 0.1em;
   
-  --links-gap: 1.5rem;
+  --subtitle-font-size: clamp(1rem, 2vw, 1.5rem);
+  --subtitle-color: var(--color-white);
+  --subtitle-margin-top: 1rem;
   
-  --link-font-size: clamp(2rem, 3.5vw, 4rem);
-  --link-padding: 2rem 4rem;
-  --link-min-width: 450px;
+  --email-color: var(--color-yellow);
+  --email-color-hover: var(--color-white);
+  --email-transition: color 0.2s;
+  
+  --links-gap: 1.5rem;
+  --links-gap-tablet: 1rem;
+  
+  --link-font-size: clamp(4rem, 6vw, 6rem);
+  --link-font-size-tablet: clamp(2rem, 5vw, 4rem);
+  --link-font-size-mobile: clamp(1.5rem, 4.5vw, 2.5rem);
+  --link-padding: 0.5rem 2.5rem;
+  --link-padding-tablet: 1rem 3rem;
+  --link-padding-mobile: 0.5rem 1.5rem;
+  --link-letter-spacing: 0.02em;
   --link-transition: all 0.2s;
   --link-hover-offset: -10px;
   --link-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -88,12 +107,14 @@ const socialLinks = [
   display: grid;
   grid-template-columns: var(--content-grid-columns);
   gap: var(--content-gap);
-  align-items: center;
+  align-items: start;
+  justify-items: start;
 }
 
 .footer-left {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .footer-title {
@@ -107,21 +128,42 @@ const socialLinks = [
   text-transform: uppercase;
 }
 
+.footer-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin: var(--subtitle-margin-top) 0 0 0.5em;
+  line-height: 1.4;
+  font-weight: normal;
+}
+
+.footer-email {
+  color: var(--email-color);
+  text-decoration: none;
+  transition: var(--email-transition);
+}
+
+.footer-email:hover {
+  color: var(--email-color-hover);
+}
+
 .footer-right {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: var(--links-gap);
-  align-items: flex-end;
+  width: 100%;
+  justify-items: start;
 }
 
 .social-link {
   font-family: var(--font-body);
   font-size: var(--link-font-size);
   padding: var(--link-padding);
+  letter-spacing: var(--link-letter-spacing);
+  line-height: 1;
   text-decoration: none;
   transition: var(--link-transition);
-  display: block;
-  min-width: var(--link-min-width);
+  display: grid;
+  white-space: nowrap;
   text-align: center;
 }
 
@@ -133,11 +175,13 @@ const socialLinks = [
 .social-link--red {
   background: var(--link-red-bg);
   color: var(--link-red-color);
+  transform: translateX(-0.5rem);
 }
 
 .social-link--yellow {
   background: var(--link-yellow-bg);
   color: var(--link-yellow-color);
+  justify-self: end;
 }
 
 .social-link--green {
@@ -150,11 +194,30 @@ const socialLinks = [
   .footer-content {
     grid-template-columns: var(--content-grid-columns-tablet);
     gap: var(--content-gap-tablet);
-    text-align: center;
+    align-self: start;
   }
   
   .footer-left {
-    justify-content: center;
+    align-items: start;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-right {
+    align-items: center;
+  }
+
+  .social-link--red  {
+    transform: none;
+  }
+
+  .social-link--yellow {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--footer-padding-mobile);
   }
   
   .footer-right {
@@ -162,13 +225,21 @@ const socialLinks = [
   }
   
   .social-link {
-    min-width: 100%;
+    font-size: var(--link-font-size-tablet);
+    padding: var(--link-padding-tablet);
+    width: 100%;
   }
 }
 
-@media (max-width: 768px) {
-  .footer {
-    padding: var(--footer-padding-mobile);
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .social-link {
+    font-size: var(--link-font-size-mobile);
+    padding: var(--link-padding-mobile);
+  }
+
+  .footer-subtitle {
+    margin-left: 0;
   }
 }
 </style>
