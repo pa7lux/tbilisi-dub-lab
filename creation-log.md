@@ -3,15 +3,14 @@
 ## [2024-12-05] - Georgian Layout: Vertical on All Desktop Screens
 
 ### Changed
-- **main.css**: Removed Georgian-specific word wrapping rules
-- **Hero.vue**: Removed `white-space: normal` from mobile responsive styles
-- All text (Georgian and English) now follows `white-space: nowrap` behavior
-- Tags, buttons, and links will not wrap to multiple lines
+- **AppFooter.vue**: Changed Facebook link text color from white to dark
+- Variable `--link-yellow-color` changed from `var(--color-white)` to `var(--color-dark)`
+- Better contrast on yellow background for improved readability
 
 ### Result
-- All texts maintain single-line display regardless of language
-- Georgian texts no longer wrap, ensuring consistent design
-- Better visual consistency across all components and languages
+- Facebook link now has dark text on yellow background
+- Improved visual contrast and accessibility
+- Consistent with standard design patterns for yellow backgrounds
 
 ---
 

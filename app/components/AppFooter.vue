@@ -91,7 +91,7 @@ const socialLinks = [
   --link-red-bg: var(--color-red);
   --link-red-color: var(--color-white);
   --link-yellow-bg: var(--color-yellow);
-  --link-yellow-color: var(--color-white);
+  --link-yellow-color: var(--color-dark);
   --link-green-bg: var(--color-green);
   --link-green-color: var(--color-white);
   
