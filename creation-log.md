@@ -1,5 +1,99 @@
 # Creation Log
 
+## [2024-12-05] - ContactForm Component
+
+### Added
+- **ContactForm.vue**: Component with contact form
+  - Title: "Contact us" / "დაგვიკავშირდით"
+  - Description paragraph about being open to dialogue
+  - Form fields:
+    - Name (required)
+    - Email (required)
+    - Link to profile or music (optional)
+    - Message (required textarea)
+    - Submit button
+  - All sizes and colors as CSS variables
+  - **Georgian version**: Uses `var(--font-body-ka)` (Mersad font)
+    - Title size: `clamp(1.8rem, 4vw, 3.5rem)` to fit in overlay (adjusted to fit long title)
+    - Letter-spacing: `0.02em` (reduced)
+  - **English version**: Uses `var(--font-heading)` (Big Shoulders)
+    - Title size: `clamp(3rem, 8vw, 8rem)`
+    - Letter-spacing: `0.05em`
+  - Color scheme: white text, green labels, yellow focus states
+  - Form styling: semi-transparent inputs with borders, hover/focus effects
+  - Submit button: red background with yellow hover state
+  - Placeholder line-height: `1.4` for better readability
+  - No form handlers yet - only markup and styling
+
+- **i18n translations**: Added `contact` section
+  - Complete contact form translations in English and Georgian
+  - Includes: title, description, nameLabel, namePlaceholder, emailLabel, emailPlaceholder, linkLabel, linkPlaceholder, messageLabel, messagePlaceholder, submitButton
+  - Fixed i18n error: escaped `@` symbol in email placeholder as `{'@'}`
+
+### Changed
+- **IntroSection.vue**: Integrated ContactForm into contact overlay
+  - Replaced placeholder content with ContactForm component
+  - "contact" button now opens overlay from right with functional form
+  - Removed unused placeholder styles
+
+### Result
+- Professional contact form ready for overlay display
+- Form opens in sliding overlay when "contact" button is clicked
+- All fields properly styled with focus states
+- Responsive design adapts to mobile screens
+- Bilingual support (English/Georgian)
+- Ready for future form submission logic integration
+
+---
+
+## [2024-12-05] - Fixed Georgian Font: Switched to Mersad
+
+### Changed
+- **variables.css**: Changed Georgian font from 'ALK Sanet' back to 'Mersad'
+  - Font file: `public/fonts/Mersad.woff`
+  - Variable `--font-body-ka` now uses 'Mersad'
+  - ALK Sanet font was not displaying correctly
+
+### Result
+- All Georgian text now uses Mersad font properly
+- DonationInfo headings display correctly in Georgian
+
+---
+
+## [2024-12-05] - DonationInfo Component (Restored)
+
+### Added
+- **DonationInfo.vue**: Component displaying donation information
+  - Bank details: IBAN GE21BG0000000536190048
+  - Recipient: ALEXANDER PATLUKH / ალექსანდრე პატლუხი
+  - Bank: Bank of Georgia / საქართველოს ბანკი
+  - Email link for alternative donation methods (cash, crypto)
+  - All sizes and colors as CSS variables
+  - **Georgian version**: ALL headings use `var(--font-body)` (Mersad font)
+    - Title size: `clamp(2rem, 4.5vw, 4.5rem)` to fit in overlay
+    - Title and subtitle letter-spacing: `0.02em` (reduced)
+  - **English version**: ALL headings use `var(--font-heading)` (Big Shoulders)
+    - Title size: `clamp(3rem, 8vw, 8rem)`
+    - Letter-spacing: `0.05em` (title), `0.03em` (subtitle)
+  - Color scheme: white text, yellow subtitles, green labels
+  
+- **i18n translations**: Added `donation` section
+  - Complete donation information in English and Georgian
+  - Includes: title, description, bankTitle, bankName, recipientName, otherTitle, otherDescription, email
+
+### Changed
+- **IntroSection.vue**: "donate" button now opens overlay with DonationInfo component
+- **Overlay.vue**: Restored sliding panel component
+- **i18n locales**: Restored `overlay.close` translations
+
+### Result
+- Professional donation information display
+- Bank details clearly visible with proper formatting
+- Bilingual support (English/Georgian)
+- Georgian text fits properly in overlay with reduced title size
+
+---
+
 ## [2024-12-05] - Georgian Layout: Vertical on All Desktop Screens
 
 ### Added

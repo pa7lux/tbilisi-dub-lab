@@ -21,10 +21,8 @@
     "paragraph2": "We have launched a Dub Fund to support musicians. We have a team of producers who help to prepare releases. And we are opened for new residents and partners.",
     "donateText": "donate",
     "donateUrl": "#donate",
-    "donatePlaceholder": "Donation information will be available here soon.",
     "contactText": "contact",
-    "contactUrl": "#contact",
-    "contactPlaceholder": "Contact form will be available here soon."
+    "contactUrl": "#contact"
   },
   "footer": {
     "title": "FOLLOW",
@@ -41,6 +39,29 @@
   },
   "overlay": {
     "close": "Close"
+  },
+  "donation": {
+    "title": "donate",
+    "description": "Dub Fund collects donations. All collected funds go to finance musicians' rehearsals, sound recording and coverage of activities. We report on the foundation's work once a month.",
+    "bankTitle": "Bank Transfer",
+    "bankName": "Bank of Georgia",
+    "recipientName": "ALEXANDER PATLUKH",
+    "otherTitle": "Other Ways",
+    "otherDescription": "If you want to donate to us in other ways, including cash or cryptocurrencies, write to",
+    "email": "hi{'@'}dub.ge"
+  },
+  "contact": {
+    "title": "contact us",
+    "description": "We are open to any dialogue. If you are a musician, producer, or just someone who wants to collaborate with us, fill out this form and we will get in touch with you.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your{'@'}email.com",
+    "linkLabel": "Link to profile or music (optional)",
+    "linkPlaceholder": "https://...",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about yourself and your ideas...",
+    "submitButton": "Send"
   }
 }
 

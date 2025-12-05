@@ -41,18 +41,12 @@ const closeContact = () => {
 
     <!-- Donate Overlay - slides from left -->
     <Overlay :is-open="isDonateOpen" direction="left" @close="closeDonate">
-      <div class="overlay-text">
-        <h2>{{ $t('intro.donateText') }}</h2>
-        <p>{{ $t('intro.donatePlaceholder') }}</p>
-      </div>
+      <DonationInfo />
     </Overlay>
 
     <!-- Contact Overlay - slides from right -->
     <Overlay :is-open="isContactOpen" direction="right" @close="closeContact">
-      <div class="overlay-text">
-        <h2>{{ $t('intro.contactText') }}</h2>
-        <p>{{ $t('intro.contactPlaceholder') }}</p>
-      </div>
+      <ContactForm />
     </Overlay>
   </section>
 </template>
@@ -191,25 +185,4 @@ const closeContact = () => {
     padding: var(--btn-padding-mobile);
   }
 }
-
-/* Overlay content styles */
-.overlay-text {
-  color: var(--color-white);
-}
-
-.overlay-text h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(3rem, 8vw, 8rem);
-  margin: 0 0 2rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.overlay-text p {
-  font-family: var(--font-body);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  line-height: 1.5;
-  margin: 0;
-}
 </style>
-
