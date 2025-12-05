@@ -1,10 +1,35 @@
 {
+  "header": {
+    "langSwitchEn": "Switch to English",
+    "langSwitchKa": "Switch to Georgian",
+    "menu": "Menu"
+  },
+  "hero": {
+    "title": "TBILISI",
+    "subtitle": "DUB LAB",
+    "tagGreen": "we help",
+    "tagYellow": "the music",
+    "tagRed": "happen",
+    "logoAlt": "Tbilisi Dub Lab Lion"
+  },
   "nav": {
     "home": "Home",
     "logo": "Tbilisi Dub Lab"
   },
+  "intro": {
+    "paragraph1": "We are non-profit community who are eager to create the environment where reggae, dub and roots culture in Georgia can grow, connect and sound louder.",
+    "paragraph2": "We have launched a Dub Fund to support musicians. We have a team of producers who help to prepare releases. And we are opened for new residents and partners.",
+    "donateText": "donate",
+    "donateUrl": "#donate",
+    "contactText": "contact",
+    "contactUrl": "#contact"
+  },
   "footer": {
-    "copyright": "All rights reserved"
+    "title": "FOLLOW",
+    "copyright": "All rights reserved",
+    "instagram": "instagram",
+    "facebook": "facebook",
+    "tiktok": "TikTok"
   },
   "lang": {
     "switch": "Switch language",

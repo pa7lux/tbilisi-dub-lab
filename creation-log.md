@@ -1,5 +1,429 @@
 # Creation Log
 
+## [2024-12-05] - Refactored All Components: CSS Variables for Sizes and Colors
+
+### Changed
+- **AppHeader.vue**: All sizes and colors extracted to CSS variables
+- **IntroSection.vue**: All sizes and colors extracted to CSS variables
+- **AppFooter.vue**: All sizes and colors extracted to CSS variables
+- **Hero.vue**: Already had CSS variables (no changes needed)
+
+### Added New Rule
+- All sizes and colors must be defined as CSS variables at the top of component styles
+- Variables scoped to component (inside root class)
+- Descriptive naming: `--btn-padding`, `--title-color`, `--content-gap`, etc.
+- Variables grouped by type (spacing, colors, sizes, transitions)
+- Rule added to: `.cursorrules`, `.cusor/rules/general.mdc`, `claude.md`
+
+### Result
+- Consistent approach across all components
+- Easy to maintain and update styles
+- All magic numbers replaced with named variables
+- Better readability and maintainability
+
+---
+
+## [2024-12-05] - Moved All Content to i18n
+
+### Changed
+- **IntroSection.vue**: Now uses i18n (`$t('intro.*')`) instead of hardcoded computed
+- **AppFooter.vue**: Now uses i18n (`$t('footer.*')`) for all text including social media names
+- **i18n/locales/en.json** & **ka.json**: Added `intro` and expanded `footer` sections
+
+### Result
+- All user-facing text now managed through i18n
+- No hardcoded text in any component
+- Consistent approach across all components: Hero, Header, IntroSection, Footer
+
+---
+
+## [2024-12-05] - Removed Nuxt Content from Project
+
+### Removed
+- `@nuxt/content` package from dependencies
+- `@nuxt/content` from modules in `nuxt.config.ts`
+- All content configuration from `nuxt.config.ts`
+- `content/` folder
+- Uninstalled via `npm uninstall @nuxt/content`
+
+### Updated
+- `.cursorrules`, `.cusor/rules/general.mdc`, `claude.md` - removed Nuxt Content references
+- Updated content management strategy in all rule files
+
+### Reason
+- Nuxt Content was not working in this project (always returned `undefined`)
+- Not needed - all content managed via i18n (UI) and hardcoded computed (long-form text)
+
+---
+
+## [2024-12-05] - Reverted to Hardcoded Content (Working State)
+
+### Final Implementation
+- **IntroSection.vue**: Content hardcoded in component via `computed` property based on locale
+- **Hero.vue**: Uses i18n (`$t('hero.*')`)
+- **Header.vue**: Uses i18n (`$t('header.*')`)
+- **index.vue**: Simple - just renders components without props
+- All components work reliably and switch content when language changes
+
+### What Was Tried
+- ❌ Nuxt Content: Did not work (files not loading, returned `undefined`)
+- ❌ i18n for long-form content: Moved back to hardcoded for IntroSection
+- ✅ Hardcoded content in components: Works perfectly
+
+### Content Management Strategy
+- **UI elements** (buttons, labels, short text): i18n
+- **Long-form content** (paragraphs): Hardcoded in components with `computed` based on locale
+
+---
+
+## [2024-12-04] - Fixed i18n Configuration (Final)
+
+### Fixed
+- **IMPORTANT**: `nuxt.config.ts` uses `langDir: 'locales'` (without i18n prefix)
+- The i18n module automatically adds `i18n/` prefix
+- Files are located in: `i18n/locales/en.json` and `i18n/locales/ka.json`
+- Removed duplicate `locales/` folder
+- Added debug output to `pages/index.vue` to track content loading
+- **Server restart required!**
+
+---
+
+## [2024-12-04] - Implemented Content Management for Hero and IntroSection
+
+### Changed
+- `app/components/Hero.vue`:
+  - Now uses i18n: `$t('hero.title')`, `$t('hero.subtitle')`, `$t('hero.tagGreen')`, etc.
+  - All texts manageable through `locales/en.json` and `locales/ka.json`
+  
+- `app/components/IntroSection.vue`:
+  - Now accepts content as props instead of hardcoded data
+  - Props interface defined for type safety
+  
+- `app/pages/index.vue`:
+  - Loads intro data from Nuxt Content: `/${locale}/home/intro`
+  - Passes data to IntroSection as props
+  - Removed unused about and sections queries
+  - Removed font/color preview sections
+
+### Added
+- `content/en/home/intro.md` - English intro section content
+- `content/ka/home/intro.md` - Georgian intro section content
+- `locales/en.json` and `locales/ka.json` - hero section translations
+
+### Deleted
+- All unused content files (about.md, sections/)
+- Font and color preview sections from index page
+
+---
+
+## [2024-12-04] - Cleaned Up Duplicate i18n Folder
+
+### Deleted
+- `i18n/` folder - duplicate from earlier troubleshooting
+- Project uses `locales/` folder as configured in `nuxt.config.ts`
+- `langDir: 'locales'` - correct configuration
+
+---
+
+## [2024-12-04] - Content Management Rules and AppHeader i18n
+
+### Changed
+- `app/components/AppHeader.vue`:
+  - Now uses i18n for button titles: `$t('header.langSwitchEn')`, `$t('header.langSwitchKa')`
+  - All user-facing text managed through locales files
+- `locales/en.json`, `locales/ka.json`:
+  - Added `header` section with language switch texts
+
+### Added Rules
+All rule files (`.cusor/rules/general.mdc`, `.cursorrules`, `claude.md`):
+- **UI elements** → use i18n (buttons, labels, navigation)
+- **Page content** → use Nuxt Content (text blocks, articles)
+- Never hardcode user-facing text
+- Clear separation: short UI strings vs long-form content
+
+---
+
+## [2024-12-04] - IntroSection: Reverted to Hardcoded Content (Final)
+
+### Reverted
+- `app/components/IntroSection.vue`:
+  - Nuxt Content module resolution doesn't work reliably in components
+  - `#content` import fails with "Cannot find module" error
+  - Reverted to computed property with hardcoded bilingual content
+  
+### Issue Summary
+- Tried multiple approaches: auto-import, explicit import from '#content'
+- Module resolution works in pages but not in components
+- For maintainability: keep IntroSection with hardcoded content
+- Other content (About, Sections) works fine in pages using queryContent
+
+---
+
+## [2024-12-04] - IntroSection: Increased Text Sizes
+
+### Changed
+- `app/components/IntroSection.vue`:
+  - Increased paragraph font size: `clamp(2.5rem, 4vw, 5rem)` (was 1.8rem/3vw/3.5rem)
+  - Increased line-height: `1.5` (was 1.4) for better readability
+  - Increased button font size: `clamp(2rem, 3vw, 4rem)` (was 1.5rem/2.5vw/3rem)
+  - Increased button padding: `2rem 5rem` (was 1.5rem 4rem)
+  - Better page fill and visual presence
+
+---
+
+## [2024-12-04] - IntroSection: Full Height Layout
+
+### Changed
+- `app/components/IntroSection.vue`:
+  - Added `min-height: 100vh` for full viewport height
+  - Added `display: flex` and `align-items: center` for vertical centering
+  - Section now takes at least full screen height with content centered
+
+---
+
+## [2024-12-04] - AppHeader: Inverted Language Flags Logic
+
+### Changed
+- `app/components/AppHeader.vue`:
+  - Inverted flag button states: active (current) language is now semi-transparent
+  - Non-active flags are fully opaque and clickable
+  - Active flag: `opacity: 0.4`, `pointer-events: none`, no hover effect
+  - Inactive flags: `opacity: 1`, hover scale animation
+
+---
+
+## [2024-12-04] - Hero Component: Final Responsive Layout (User Implementation)
+
+### Changed
+- Implemented proper responsive breakpoints with smart grid approach:
+  - **>1200px**: Standard 3-column layout `3fr 2fr 2fr`
+  - **769px-1200px**: Compact layout with `min-content min-content 1fr`
+    - Titles take 2 columns, logo in 3rd column (spans 2 rows)
+    - All 3 tags in one row, each in own column, no transforms
+  - **769px-1024px**: Same as above but tags stack vertically (rows 3, 4, 5)
+  - **<768px**: Full mobile vertical layout
+
+### Key Technique Learned
+- Using `grid-template-columns: min-content min-content 1fr` allows:
+  - First columns take exactly as much space as content needs
+  - Last column gets remaining space
+  - Perfect for text + logo layouts
+  - No need for transforms or complex positioning
+
+---
+
+## [2024-12-04] - Hero Component: Two-Row Layout for Small Desktop (Fixed)
+
+### Changed
+- `app/components/Hero.vue`:
+  - Small Desktop (1025px-1150px) 2-row layout:
+    - **Row 1**: TBILISI (top) + DUB LAB (bottom) on left, Logo on right
+    - **Row 2**: All three colored tags in one horizontal line (inline-block)
+    - Grid: `auto 280px` × `auto auto`
+    - Titles: `clamp(6rem, 11vw, 11rem)` with correct vertical alignment
+    - Tags: `clamp(2.2rem, 4vw, 4rem)` all span both columns
+    - Logo max-width: 280px, centered vertically
+
+---
+
+## [2024-12-04] - Hero Component: Refactored to CSS Variables
+
+### Changed
+- `app/components/Hero.vue`:
+  - Extracted all sizes, paddings, gaps, and spacing values into CSS variables
+  - Added comprehensive variable definitions at the top of the component styles
+  - Removed all `!important` flags - no longer needed
+  - Improved maintainability: all values now defined in one place
+  - Variables include: padding, max-widths, gaps, font sizes, letter-spacing, word-spacing, transforms
+
+---
+
+## [2024-12-04] - Fixed Horizontal Scroll (Simple Solution)
+
+### Fixed
+- `app/components/Hero.vue`, `IntroSection.vue`, `AppFooter.vue`:
+  - Changed from `width: 100vw` to simple `width: 100%`
+  - Removed all positioning tricks - not needed since sections are not in a constrained container
+  - This avoids the scrollbar issue that `100vw` creates and prevents white stripes
+- `app/assets/css/main.css`:
+  - Removed `overflow-x: hidden` hack (no longer needed)
+  - Removed old responsive styles for titles
+
+---
+
+## [2024-12-04] - Hero Section: Account for Header Height
+
+### Changed
+- `app/assets/css/variables.css`:
+  - Added `--header-height: 4rem` CSS variable
+- `app/components/Hero.vue`:
+  - Changed `min-height` from `100dvh` to `calc(100dvh - var(--header-height))`
+  - Now Hero section + sticky header together fill exactly 100vh
+
+---
+
+## [2024-12-04] - Hero Component: Fixed Title Size Consistency (v2)
+
+### Fixed
+- `app/components/Hero.vue`:
+  - Combined `.hero-title` and `.hero-subtitle` selectors to ensure identical styles
+  - Added `!important` flags to override all inherited styles
+  - Explicitly reset all properties that could affect size:
+    - `font-size`, `word-spacing`, `letter-spacing`, `line-height`
+    - `white-space`, `font-weight`, `margin`
+  - Both titles now guaranteed to be pixel-perfect identical on all mobile screens
+
+---
+
+## [2024-12-04] - Hero Component: Increased Mobile Title Sizes
+
+### Changed
+- `app/components/Hero.vue`:
+  - Increased title sizes on mobile for better visibility:
+    - Tablet/mobile (1024px): both use `clamp(8rem, 20vw, 18rem)` (increased from 6rem/16vw/14rem)
+    - Small mobile (480px): both use `clamp(6rem, 18vw, 14rem)` (increased from 5rem/16vw/12rem)
+  - Both TBILISI and DUB LAB guaranteed to be exactly the same size on all breakpoints
+
+---
+
+## [2024-12-04] - Hero Component Responsive Design
+
+### Changed
+- `app/components/Hero.vue`:
+  - Simplified responsive layout for smaller screens
+  - Changed grid to flexbox for tablets/mobile (max-width: 1024px)
+  - Logo positioned at the top using `order: -1`
+  - All elements centered and stacked vertically
+  - Removed all transforms on mobile
+  - Clean, simple layout without complex positioning
+
+---
+
+## [2024-12-04] - Code Comments Language Rule
+
+### Added
+- Added rule "Use English only to make comments in the code" to:
+  - `.cusor/rules/general.mdc`
+  - `.cursorrules`
+  - `claude.md`
+- All rule files are now synchronized with this requirement
+
+---
+
+## [2024-12-04] - TypeScript Linter Fixes
+
+### Fixed
+- `app/pages/index.vue`:
+  - Added `@ts-expect-error` comments for `queryContent` auto-imports
+  - Added type assertions `(as any)` for content properties to resolve TypeScript errors
+  - Fixed all linter errors related to Nuxt Content types
+
+---
+
+## [2024-12-04] - Footer Component
+
+### Added
+- `app/components/AppFooter.vue` - new footer component
+- Footer design matching mockup:
+  - Large "FOLLOW" text with outline style (stroke, no fill)
+  - Three social media links: Instagram (red), Facebook (yellow), TikTok (green)
+  - Dark background using `var(--color-dark)`
+  - Full viewport width
+  - Grid layout with FOLLOW on left, social links on right
+  - Hover effects on social links (slide left + shadow)
+  - Responsive design
+
+### Changed
+- `app/layouts/default.vue`:
+  - Replaced old footer with AppFooter component
+  - Removed old footer styles
+  - Simplified layout structure
+- `app/pages/index.vue`:
+  - Removed demo sections (Color Palette and Font Preview)
+  - Removed demo styles
+  - Cleaned up page structure
+  - Fixed spacing: removed top padding from content-wrapper
+  - Added explicit margin/padding reset to home-page
+- `app/components/AppFooter.vue`:
+  - Increased stroke width for "FOLLOW" text (2px → 3px)
+  - Adjusted letter-spacing (0.05em → 0.1em)
+  - Added text-transform: uppercase
+  - Adjusted line-height (1 → 0.9)
+- `app/assets/css/main.css`:
+  - Fixed body margin (changed from `margin: 0 auto` to `margin: 0`)
+  - This removes unwanted white space at the top
+
+---
+
+## [2024-12-04] - Intro Section Component
+
+### Added
+- `app/components/IntroSection.vue` - new intro section component
+- Red background section with:
+  - Two paragraphs describing the community and mission
+  - Bilingual content (English/Georgian) using computed property
+  - Two call-to-action buttons: "donate" (green) and "contact" (yellow)
+  - Full viewport width
+  - Responsive design
+  - Large typography matching design mockup
+
+### Changed
+- `app/pages/index.vue`: added IntroSection component after Hero
+
+---
+
+## [2024-12-04] - Hero Component
+
+### Added
+- `app/components/Hero.vue` - new hero section component
+- Hero section design matching mockup:
+  - Large "TBILISI DUB LAB" text with heading font
+  - Lion logo SVG in center
+  - Three colored tags on right: "we help" (green), "the music" (yellow), "happen" (red)
+  - Dark background using `var(--color-dark)` (#1E202C)
+  - Responsive grid layout
+  - Fluid typography with clamp()
+  - Full viewport width (100vw)
+  - Full viewport height (100vh)
+
+### Changed
+- `app/pages/index.vue`: 
+  - Added Hero component at top of page
+  - Wrapped remaining content in `.content-wrapper` with max-width
+- `app/layouts/default.vue`:
+  - Removed container wrapper from main
+  - Removed padding from main to allow full-width components
+- `app/components/Hero.vue`:
+  - Updated background to solid dark color `var(--color-dark)`
+  - Increased tag sizes and spacing
+  - Made tags fill their column width
+  - Increased max-width to 1600px
+
+---
+
+## [2024-12-04] - Header Component Redesign
+
+### Changed
+- Redesigned header component to match design mockup
+- Replaced text language buttons with flag emojis (🇬🇧 🇬🇪)
+- Added hamburger menu button with animation
+- Updated header styling:
+  - Using `var(--color-dark)` for background
+  - Sticky positioning
+  - Right-aligned controls
+  - Flag opacity indicates active language
+- Removed logo from header
+- Simplified footer text
+- Moved header to separate component `app/components/AppHeader.vue`
+
+### Added
+- `app/components/AppHeader.vue` - standalone header component
+- Hamburger menu toggle functionality
+- Active state for language flags
+- Smooth transitions for all interactive elements
+
+---
+
 ## [2024-12-04] - Hydration Mismatch Fix
 
 ### Fixed

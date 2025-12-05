@@ -39,6 +39,9 @@
   --color-yellow: #F0D817;
   --color-green: #3EB308;
   --color-white: #FFFFFF;
+  
+  /* Layout */
+  --header-height: 4rem;
 }
 
 /* Georgian language specific styles */

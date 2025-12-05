@@ -4,3 +4,17 @@
 - add all key updates during the development of the app to creation-log.md file
 - keep all rules for agents aligned in general.mdc, .cursorrules and claude.md files
 - use English or Georgian in website UI. No any other languages allowed
+- Use English only to make comments in the code
+
+# Content Management
+- **All user-facing text** must use i18n (i18n/locales/en.json, i18n/locales/ka.json)
+- Never hardcode user-facing text in components - always use `$t()` for translations
+- This includes: buttons, labels, navigation, paragraphs, titles, everything
+- Keep all translations in sync between en.json and ka.json
+
+# CSS Styles
+- **All sizes and colors** must be defined as CSS variables at the top of component styles
+- Variables should be scoped to the component (inside component's root class)
+- Use descriptive variable names (e.g., `--btn-padding`, `--title-color`, `--content-gap`)
+- Group related variables together (spacing, colors, sizes, transitions, etc.)
+- Apply variables in actual styles below the variable declarations
