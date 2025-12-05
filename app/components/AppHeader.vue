@@ -1,10 +1,19 @@
 <script setup lang="ts">
 const { locale, setLocale } = useI18n()
+const { posthog } = usePostHog()
 
 const menuOpen = ref(false)
 
 const switchLocale = (code: string) => {
   setLocale(code as 'en' | 'ka')
+  
+  // Track language switch event
+  if (import.meta.client) {
+    posthog.capture('language_switched', {
+      from_language: locale.value,
+      to_language: code
+    })
+  }
 }
 
 const toggleMenu = () => {

@@ -80,6 +80,8 @@
 <script setup>
 import { ref } from 'vue'
 
+const { posthog } = usePostHog()
+
 // Form data
 const formData = ref({
   name: '',
@@ -100,6 +102,14 @@ const handleSubmit = async () => {
   isSubmitting.value = true
   submitStatus.value = null
 
+  // Track form submission start
+  if (import.meta.client) {
+    posthog.capture('contact_form_submit_started', {
+      has_link: !!formData.value.link,
+      message_length: formData.value.message.length
+    })
+  }
+
   try {
     const formDataToSend = new FormData()
     formDataToSend.append('name', formData.value.name)
@@ -117,6 +127,13 @@ const handleSubmit = async () => {
     // So we assume success if no error is thrown
     submitStatus.value = 'success'
     
+    // Track successful form submission
+    if (import.meta.client) {
+      posthog.capture('contact_form_submit_success', {
+        has_link: !!formData.value.link
+      })
+    }
+    
     // Reset form
     formData.value = {
       name: '',
@@ -133,6 +150,13 @@ const handleSubmit = async () => {
   } catch (error) {
     console.error('Form submission error:', error)
     submitStatus.value = 'error'
+
+    // Track form submission error
+    if (import.meta.client) {
+      posthog.capture('contact_form_submit_error', {
+        error_message: error.message
+      })
+    }
 
     // Hide error message after 5 seconds
     setTimeout(() => {

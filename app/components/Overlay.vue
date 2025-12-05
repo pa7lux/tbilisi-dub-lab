@@ -4,12 +4,15 @@ import { watch } from 'vue'
 interface Props {
   isOpen: boolean
   direction: 'left' | 'right'
+  overlayType?: string  // 'donate' or 'contact'
 }
 
 const props = defineProps<Props>()
 const emit = defineEmits<{
   close: []
 }>()
+
+const { posthog } = usePostHog()
 
 // Block/unblock page scroll when overlay is open/closed
 watch(() => props.isOpen, (isOpen) => {
@@ -23,13 +26,39 @@ watch(() => props.isOpen, (isOpen) => {
 // Close on backdrop click
 const handleBackdropClick = (event: MouseEvent) => {
   if (event.target === event.currentTarget) {
+    // Track overlay close
+    if (import.meta.client && props.overlayType) {
+      posthog.capture('overlay_closed', {
+        overlay_type: props.overlayType,
+        close_method: 'backdrop_click'
+      })
+    }
     emit('close')
   }
+}
+
+// Close on close button click
+const handleCloseClick = () => {
+  // Track overlay close
+  if (import.meta.client && props.overlayType) {
+    posthog.capture('overlay_closed', {
+      overlay_type: props.overlayType,
+      close_method: 'close_button'
+    })
+  }
+  emit('close')
 }
 
 // Close on Escape key
 const handleEscape = (event: KeyboardEvent) => {
   if (event.key === 'Escape' && props.isOpen) {
+    // Track overlay close
+    if (import.meta.client && props.overlayType) {
+      posthog.capture('overlay_closed', {
+        overlay_type: props.overlayType,
+        close_method: 'escape_key'
+      })
+    }
     emit('close')
   }
 }
@@ -60,7 +89,7 @@ watch(() => props.isOpen, (isOpen) => {
           >
             <button 
               class="overlay-close"
-              @click="emit('close')"
+              @click="handleCloseClick"
               :aria-label="$t('overlay.close')"
             >
               ✕

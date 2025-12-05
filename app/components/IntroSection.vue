@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const { posthog } = usePostHog()
+
 const isDonateOpen = ref(false)
 const isContactOpen = ref(false)
 
 const openDonate = () => {
   isDonateOpen.value = true
+  
+  // Track donate button click
+  if (import.meta.client) {
+    posthog.capture('donate_button_clicked')
+  }
 }
 
 const closeDonate = () => {
@@ -14,6 +21,11 @@ const closeDonate = () => {
 
 const openContact = () => {
   isContactOpen.value = true
+  
+  // Track contact button click
+  if (import.meta.client) {
+    posthog.capture('contact_button_clicked')
+  }
 }
 
 const closeContact = () => {
@@ -40,12 +52,12 @@ const closeContact = () => {
     </div>
 
     <!-- Donate Overlay - slides from left -->
-    <Overlay :is-open="isDonateOpen" direction="left" @close="closeDonate">
+    <Overlay :is-open="isDonateOpen" direction="left" overlay-type="donate" @close="closeDonate">
       <DonationInfo />
     </Overlay>
 
     <!-- Contact Overlay - slides from right -->
-    <Overlay :is-open="isContactOpen" direction="right" @close="closeContact">
+    <Overlay :is-open="isContactOpen" direction="right" overlay-type="contact" @close="closeContact">
       <ContactForm />
     </Overlay>
   </section>

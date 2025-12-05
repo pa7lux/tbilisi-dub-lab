@@ -1,21 +1,44 @@
 <script setup lang="ts">
+const { posthog } = usePostHog()
+
 const socialLinks = [
   {
     nameKey: 'footer.instagram',
+    platform: 'instagram',
     url: 'https://instagram.com/tbilisidublab',
     color: 'red'
   },
   {
     nameKey: 'footer.facebook',
+    platform: 'facebook',
     url: 'https://facebook.com/tbilisidublab',
     color: 'yellow'
   },
   {
     nameKey: 'footer.tiktok',
+    platform: 'tiktok',
     url: 'https://tiktok.com/@tbilisidublab',
     color: 'green'
   }
 ]
+
+// Track social link clicks
+const trackSocialClick = (platform: string) => {
+  if (import.meta.client) {
+    posthog.capture('social_link_clicked', {
+      platform: platform
+    })
+  }
+}
+
+// Track email click
+const trackEmailClick = () => {
+  if (import.meta.client) {
+    posthog.capture('email_link_clicked', {
+      location: 'footer'
+    })
+  }
+}
 </script>
 
 <template>
@@ -25,7 +48,11 @@ const socialLinks = [
         <h2 class="footer-title">{{ $t('footer.title') }}</h2>
         <p class="footer-subtitle">
           {{ $t('footer.subtitlePrefix') }} 
-          <a :href="`mailto:${$t('footer.email').replace('{\'@\'}', '@')}`" class="footer-email">
+          <a 
+            :href="`mailto:${$t('footer.email').replace('{\'@\'}', '@')}`" 
+            class="footer-email"
+            @click="trackEmailClick"
+          >
             {{ $t('footer.email').replace('{\'@\'}', '@') }}
           </a>
         </p>
@@ -40,6 +67,7 @@ const socialLinks = [
           rel="noopener noreferrer"
           class="social-link"
           :class="`social-link--${link.color}`"
+          @click="trackSocialClick(link.platform)"
         >
           {{ $t(link.nameKey) }}
         </a>

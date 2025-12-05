@@ -1,5 +1,81 @@
 # Creation Log
 
+## [2024-12-05] - PostHog Analytics Integration
+
+### Added
+- **app/composables/usePostHog.ts**: PostHog composable
+  - Initializes PostHog with API key and configuration
+  - Only runs on client side
+  - Captures pageviews and page leaves automatically
+  - Returns posthog instance for manual event tracking
+  
+- **app/plugins/posthog.client.ts**: PostHog plugin
+  - Client-side only plugin (`.client.ts` suffix)
+  - Provides `$posthog` globally via Nuxt plugin system
+  - Ensures PostHog is available in all components
+
+### Changed
+- **AppHeader.vue**: Added language switch tracking
+  - Event: `language_switched` with `from_language` and `to_language` properties
+  - Tracks every language change (EN ↔ KA)
+
+- **ContactForm.vue**: Added form submission tracking
+  - Event: `contact_form_submit_started` - when form is submitted
+    - Properties: `has_link` (boolean), `message_length` (number)
+  - Event: `contact_form_submit_success` - when submission succeeds
+    - Property: `has_link` (boolean)
+  - Event: `contact_form_submit_error` - when submission fails
+    - Property: `error_message` (string)
+
+- **IntroSection.vue**: Added button click tracking
+  - Event: `donate_button_clicked` - when "donate" button is clicked
+  - Event: `contact_button_clicked` - when "contact" button is clicked
+  - Updated Overlay components with `overlay-type` prop
+
+- **AppFooter.vue**: Added social media and email tracking
+  - Event: `social_link_clicked` - when social media link is clicked
+    - Property: `platform` (instagram/facebook/tiktok)
+  - Event: `email_link_clicked` - when email link is clicked
+    - Property: `location` (footer)
+
+- **DonationInfo.vue**: Added email tracking
+  - Event: `email_link_clicked` - when email link is clicked
+    - Property: `location` (donation_info)
+
+- **Overlay.vue**: Added overlay close tracking
+  - Event: `overlay_closed` - when overlay is closed
+    - Properties: `overlay_type` (donate/contact), `close_method` (close_button/backdrop_click/escape_key)
+  - Added optional `overlayType` prop to identify which overlay is being closed
+
+### PostHog Configuration
+- API key: `phc_TPJ7c7QsHGRy8RxO8xhO8hJpKMg0E6UwOMOKaeUThiC`
+- API host: `https://us.i.posthog.com`
+- Capture pageview: enabled (automatic)
+- Capture pageleave: enabled (automatic)
+- Persistence: localStorage
+
+### Events Tracked
+| Event Name | Component | Properties | Description |
+|-----------|-----------|------------|-------------|
+| `language_switched` | AppHeader | from_language, to_language | User switches language |
+| `donate_button_clicked` | IntroSection | - | User clicks donate button |
+| `contact_button_clicked` | IntroSection | - | User clicks contact button |
+| `contact_form_submit_started` | ContactForm | has_link, message_length | User submits contact form |
+| `contact_form_submit_success` | ContactForm | has_link | Form submitted successfully |
+| `contact_form_submit_error` | ContactForm | error_message | Form submission failed |
+| `social_link_clicked` | AppFooter | platform | User clicks social media link |
+| `email_link_clicked` | AppFooter, DonationInfo | location | User clicks email link |
+| `overlay_closed` | Overlay | overlay_type, close_method | User closes overlay |
+
+### Result
+- Complete analytics coverage across all user interactions
+- Automatic pageview tracking
+- All buttons tracked with custom events
+- Form submission tracking with detailed properties
+- Client-side only implementation (no SSR issues)
+
+---
+
 ## [2024-12-05] - SEO: Meta Tags, Favicons, and Open Graph
 
 ### Added

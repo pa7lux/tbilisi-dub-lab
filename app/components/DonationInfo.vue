@@ -1,3 +1,16 @@
+<script setup lang="ts">
+const { posthog } = usePostHog()
+
+// Track email click
+const trackEmailClick = () => {
+  if (import.meta.client) {
+    posthog.capture('email_link_clicked', {
+      location: 'donation_info'
+    })
+  }
+}
+</script>
+
 <template>
   <div class="donation-info">
     <h2 class="donation-title">{{ $t('donation.title') }}</h2>
@@ -25,7 +38,11 @@
         <h3 class="donation-subtitle">{{ $t('donation.otherTitle') }}</h3>
         <p class="donation-text">
           {{ $t('donation.otherDescription') }}
-          <a :href="`mailto:${$t('donation.email').replace('{\'@\'}', '@')}`" class="donation-email">
+          <a 
+            :href="`mailto:${$t('donation.email').replace('{\'@\'}', '@')}`" 
+            class="donation-email"
+            @click="trackEmailClick"
+          >
             {{ $t('donation.email').replace('{\'@\'}', '@') }}
           </a>
         </p>
