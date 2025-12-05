@@ -6,14 +6,17 @@
       {{ $t('contact.description') }}
     </p>
 
-    <form class="contact-form-wrapper" @submit.prevent>
+    <form class="contact-form-wrapper gform" @submit.prevent="handleSubmit">
       <div class="form-field">
         <label class="form-label" for="name">{{ $t('contact.nameLabel') }}</label>
         <input 
+          v-model="formData.name"
           type="text" 
           id="name"
           class="form-input" 
+          name="name"
           :placeholder="$t('contact.namePlaceholder')"
+          :disabled="isSubmitting"
           required
         />
       </div>
@@ -21,10 +24,13 @@
       <div class="form-field">
         <label class="form-label" for="email">{{ $t('contact.emailLabel') }}</label>
         <input 
+          v-model="formData.email"
           type="email" 
           id="email"
           class="form-input" 
           :placeholder="$t('contact.emailPlaceholder')"
+          name="email"
+          :disabled="isSubmitting"
           required
         />
       </div>
@@ -32,30 +38,111 @@
       <div class="form-field">
         <label class="form-label" for="link">{{ $t('contact.linkLabel') }}</label>
         <input 
+          v-model="formData.link"
           type="url" 
           id="link"
           class="form-input" 
+          name="link"
           :placeholder="$t('contact.linkPlaceholder')"
+          :disabled="isSubmitting"
         />
       </div>
 
       <div class="form-field">
         <label class="form-label" for="message">{{ $t('contact.messageLabel') }}</label>
         <textarea 
+          v-model="formData.message"
           id="message"
           class="form-textarea" 
           :placeholder="$t('contact.messagePlaceholder')"
           rows="6"
+          name="message"
+          :disabled="isSubmitting"
           required
         ></textarea>
       </div>
 
-      <button type="submit" class="form-submit">
-        {{ $t('contact.submitButton') }}
+      <div v-if="submitStatus === 'success'" class="form-message form-message-success">
+        {{ $t('contact.successMessage') }}
+      </div>
+
+      <div v-if="submitStatus === 'error'" class="form-message form-message-error">
+        {{ $t('contact.errorMessage') }}
+      </div>
+
+      <button type="submit" class="form-submit" :disabled="isSubmitting">
+        {{ isSubmitting ? $t('contact.submittingButton') : $t('contact.submitButton') }}
       </button>
     </form>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+// Form data
+const formData = ref({
+  name: '',
+  email: '',
+  link: '',
+  message: ''
+})
+
+// Form state
+const isSubmitting = ref(false)
+const submitStatus = ref(null) // null, 'success', 'error'
+
+// Google Apps Script URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznHdaRve4562mPQhK9-8UezP9phVNjUZgiBblrwpK8DlecX7qwRsE1tzsIAjar8WJvwQ/exec'
+
+// Handle form submission
+const handleSubmit = async () => {
+  isSubmitting.value = true
+  submitStatus.value = null
+
+  try {
+    const formDataToSend = new FormData()
+    formDataToSend.append('name', formData.value.name)
+    formDataToSend.append('email', formData.value.email)
+    formDataToSend.append('link', formData.value.link)
+    formDataToSend.append('message', formData.value.message)
+
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formDataToSend,
+      mode: 'no-cors' // Google Apps Script requires this
+    })
+
+    // With mode: 'no-cors', we can't read the response
+    // So we assume success if no error is thrown
+    submitStatus.value = 'success'
+    
+    // Reset form
+    formData.value = {
+      name: '',
+      email: '',
+      link: '',
+      message: ''
+    }
+
+    // Hide success message after 5 seconds
+    setTimeout(() => {
+      submitStatus.value = null
+    }, 5000)
+
+  } catch (error) {
+    console.error('Form submission error:', error)
+    submitStatus.value = 'error'
+
+    // Hide error message after 5 seconds
+    setTimeout(() => {
+      submitStatus.value = null
+    }, 5000)
+  } finally {
+    isSubmitting.value = false
+  }
+}
+</script>
 
 <style scoped>
 /* ContactForm Component Variables */
@@ -107,6 +194,19 @@
   --button-hover-color: var(--color-black);
   --button-letter-spacing: 0.05em;
   --button-letter-spacing-ka: 0.02em;
+  
+  --message-font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  --message-padding: 1rem 1.5rem;
+  --message-border-radius: 8px;
+  --message-margin: 0;
+  
+  --message-success-bg: rgba(76, 175, 80, 0.2);
+  --message-success-border: 2px solid var(--color-green);
+  --message-success-color: var(--color-green);
+  
+  --message-error-bg: rgba(244, 67, 54, 0.2);
+  --message-error-border: 2px solid var(--color-red);
+  --message-error-color: var(--color-red);
   
   /* Actual styles */
   color: var(--input-color);
@@ -217,6 +317,32 @@ html[lang="ka-GE"] .contact-form {
 
 .form-submit:active {
   transform: translateY(0);
+}
+
+.form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-message {
+  font-family: var(--font-body);
+  font-size: var(--message-font-size);
+  padding: var(--message-padding);
+  border-radius: var(--message-border-radius);
+  margin: var(--message-margin);
+  line-height: 1.4;
+}
+
+.form-message-success {
+  background: var(--message-success-bg);
+  border: var(--message-success-border);
+  color: var(--message-success-color);
+}
+
+.form-message-error {
+  background: var(--message-error-bg);
+  border: var(--message-error-border);
+  color: var(--message-error-color);
 }
 
 /* Responsive */

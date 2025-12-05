@@ -1,5 +1,40 @@
 # Creation Log
 
+## [2024-12-05] - ContactForm: Google Apps Script Integration
+
+### Added
+- **ContactForm.vue**: Form submission functionality
+  - POST request to Google Apps Script endpoint on form submit
+  - FormData collection: name, email, link (optional), message
+  - Loading state while form is submitting
+  - Success/error message display (auto-hide after 5 seconds)
+  - Form reset after successful submission
+  - Disabled inputs and button during submission
+  - Uses `mode: 'no-cors'` for Google Apps Script compatibility
+
+- **Form states**:
+  - `isSubmitting`: boolean - tracks loading state
+  - `submitStatus`: 'success' | 'error' | null - tracks result
+  - Form data bound with `v-model` for reactivity
+
+- **CSS Variables for messages**:
+  - `--message-success-bg`, `--message-success-border`, `--message-success-color` (green)
+  - `--message-error-bg`, `--message-error-border`, `--message-error-color` (red)
+  - Message styling with padding, border-radius, transparency
+
+- **i18n translations**:
+  - `contact.submittingButton`: "Sending..." / "იგზავნება..."
+  - `contact.successMessage`: Success confirmation text
+  - `contact.errorMessage`: Error notification text
+
+### Result
+- Fully functional contact form with Google Apps Script backend
+- User feedback with loading state and result messages
+- Smooth UX with disabled fields during submission
+- Bilingual messages (English/Georgian)
+
+---
+
 ## [2024-12-05] - ContactForm Component
 
 ### Added

@@ -61,7 +61,10 @@
     "linkPlaceholder": "https://...",
     "messageLabel": "Message",
     "messagePlaceholder": "Tell us about yourself and your ideas...",
-    "submitButton": "Send"
+    "submitButton": "Send",
+    "submittingButton": "Sending...",
+    "successMessage": "Thank you! Your message has been sent successfully. We will get back to you soon.",
+    "errorMessage": "Oops! Something went wrong. Please try again later."
   }
 }
 
