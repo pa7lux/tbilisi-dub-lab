@@ -1,23 +1,22 @@
 export const useLocaleStorage = () => {
   const { locale, setLocale } = useI18n()
-  const router = useRouter()
+  const route = useRoute()
 
-  // Restore locale from storage on mount
-  onMounted(() => {
-    if (import.meta.client) {
-      const storedLocale = localStorage.getItem('user-locale')
-      const currentPath = router.currentRoute.value.path
-      const localeFromPath = currentPath.startsWith('/ka') ? 'ka' : 'en'
-      
-      // If there's a stored locale and it differs from URL, use stored
-      if (storedLocale && storedLocale !== localeFromPath) {
-        setLocale(storedLocale as 'en' | 'ka')
-      } else if (!storedLocale) {
-        // Store the current locale
-        localStorage.setItem('user-locale', localeFromPath)
-      }
+  // Restore locale from storage immediately (before initial render)
+  if (import.meta.client) {
+    const storedLocale = localStorage.getItem('user-locale')
+    const currentPath = route.path
+    const localeFromPath = currentPath.startsWith('/ka') ? 'ka' : 'en'
+    
+    // If there's a stored locale and it differs from URL, use stored
+    if (storedLocale && storedLocale !== localeFromPath) {
+      // Synchronously set locale to prevent wrong language flash
+      setLocale(storedLocale as 'en' | 'ka')
+    } else if (!storedLocale) {
+      // Store the current locale
+      localStorage.setItem('user-locale', localeFromPath)
     }
-  })
+  }
 
   // Function to persist locale
   const persistLocale = (localeCode: string) => {
