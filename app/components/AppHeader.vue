@@ -7,8 +7,15 @@ const menuOpen = ref(false)
 const switchLocale = (code: string) => {
   setLocale(code as 'en' | 'ka')
   
-  // Track language switch event
+  // Persist locale choice
   if (import.meta.client) {
+    localStorage.setItem('user-locale', code)
+    
+    const expires = new Date()
+    expires.setFullYear(expires.getFullYear() + 1)
+    document.cookie = `user_locale=${code}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`
+    
+    // Track language switch event
     posthog.capture('language_switched', {
       from_language: locale.value,
       to_language: code

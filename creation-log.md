@@ -1,5 +1,36 @@
 # Creation Log
 
+## [2024-12-11] - Fixed Language Switcher Detection Bug (#1)
+
+### Problem
+Language switcher didn't detect the current language correctly after reopening the tab. After switching to Georgian and reopening the website, the switcher didn't reflect the actual language and users couldn't switch back to English.
+
+### Root Cause
+The i18n configuration relied solely on URL-based routing and browser detection, but didn't properly persist and restore the user's language preference across sessions. The `i18n_redirected` cookie was only a boolean flag for initial browser language detection, not the actual locale preference.
+
+### Solution
+1. **Updated nuxt.config.ts**:
+   - Added `alwaysRedirect: true` to ensure consistent redirection
+   - Added `fallbackLocale: 'en'` for better locale resolution
+
+2. **Created app/plugins/i18n.client.ts**:
+   - Detects locale from URL path on page load
+   - Stores locale in both localStorage and cookie for persistence
+   - Watches for locale changes and persists them automatically
+   - Restores the correct locale on page reload
+   - Ensures the language switcher always reflects the actual current language
+
+### Impact
+- Users can now switch languages and have their preference persist across browser sessions
+- Language switcher correctly displays the active language on page reload
+- Users can always switch between English and Georgian regardless of which language they're viewing
+
+### Files Modified
+- `nuxt.config.ts` - Updated i18n detectBrowserLanguage configuration
+- `app/plugins/i18n.client.ts` - Created new plugin for locale persistence
+
+---
+
 ## [2024-12-05] - Node.js Version Update for Netlify Compatibility
 
 ### Changed
