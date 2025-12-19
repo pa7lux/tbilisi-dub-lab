@@ -5,7 +5,7 @@ const socialLinks = [
   {
     nameKey: 'footer.instagram',
     platform: 'instagram',
-    url: 'https://www.instagram.com/tbilisi_dub_lab/',
+    url: 'https://www.instagram.com/tbilisi.dub.lab/',
     color: 'red'
   },
   {
