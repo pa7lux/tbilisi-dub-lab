@@ -1,5 +1,65 @@
 # Creation Log
 
+## [2026-02-04] - Residents Section Implementation
+
+### Added
+- **app/composables/useResidents.ts**: Composable for residents data
+  - Three residents: Martokatsi, Lasha Rukhadze, The Nice Rockers
+  - Structured data with sections: Who is he/they, What he/they does/do, Partnership
+  - Images from `/public/images/residents/`
+  
+- **app/components/ResidentCard.vue**: Card component for slider
+  - Square image with artist name
+  - Hover effect with lift animation
+  - Click handler to open detail overlay
+  - Fully responsive
+  
+- **app/components/ResidentDetail.vue**: Detail view for left overlay
+  - Artist image and name
+  - Three sections with content from data
+  - Yellow section titles, white text
+  - Responsive design with proper spacing
+  
+- **app/components/ResidentsSection.vue**: Main residents section
+  - Green background (`var(--color-green)`)
+  - Horizontal slider with artist cards
+  - Mouse drag functionality for desktop
+  - Custom scrollbar styling
+  - Call-to-action below slider
+  - Yellow button to open contact form (right overlay)
+  - Two overlays: left for resident details, right for contact form
+  - PostHog tracking: `resident_card_clicked`, `become_resident_clicked`
+  - Full viewport height layout
+  
+- **i18n translations**: Added `residents` section
+  - `title`: "RESIDENTS" / "რეზიდენტები"
+  - `callToAction`: Text about becoming a resident
+  - `contactButton`: "Contact us" / "დაგვიკავშირდით"
+  - Section titles: `whoIsHe`, `whoAreThey`, `whatHeDoes`, `whatTheyDo`, `partnership`
+
+### Changed
+- **app/pages/index.vue**: Added ResidentsSection after IntroSection
+  - Follows the structure: Hero → IntroSection (About) → ResidentsSection
+
+### Features
+- ✅ Horizontal slider with drag functionality
+- ✅ Left overlay opens on card click with resident details
+- ✅ Right overlay opens on CTA button click with contact form
+- ✅ Responsive design for all screen sizes
+- ✅ Custom scrollbar for slider
+- ✅ PostHog analytics tracking
+- ✅ Full i18n support for all text
+- ✅ CSS variables for all sizes and colors
+
+### Result
+- Complete residents section matching requirements
+- Interactive slider with smooth animations
+- Detailed artist information in left overlay
+- Contact form integration for becoming a resident
+- Fully responsive and accessible design
+
+---
+
 ## [2024-12-11] - Fixed Language Switcher Detection Bug (#1)
 
 ### Problem

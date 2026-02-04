@@ -15,6 +15,7 @@
     "better-sqlite3": "^12.5.0",
     "nuxt": "^4.2.1",
     "posthog-js": "^1.302.2",
+    "swiper": "^12.1.0",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
   }

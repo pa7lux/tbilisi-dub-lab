@@ -2,6 +2,7 @@
   <div class="home-page">
     <Hero />
     <IntroSection />
+    <ResidentsSection />
   </div>
 </template>
 
