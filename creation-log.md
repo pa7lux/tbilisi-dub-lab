@@ -1210,7 +1210,11 @@ Check:
 
 ### Fixed
 - Fixed JSON escaping for quotes in resident descriptions to prevent parse errors
-- Properly escaped all double quotes in Georgian and English texts using `\"`
+- Implemented Unicode escape sequences for typographic quotation marks:
+  - `\u201C` and `\u201D` for double quotes in both English and Georgian (e.g., "Martokatsi", "მარტოკაცი", "Share a Vibe")
+  - `\u2019` for apostrophes (e.g., Teeth 'n' Tongue Jam)
+- Georgian text uses the same quotation style as English for consistency
+- This ensures proper display of typographic quotes on the website without visible escape sequences
 
 ---
 
