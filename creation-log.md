@@ -1183,6 +1183,37 @@ Check:
 
 ---
 
+## [2026-02-05] - Updated Georgian Translations for Residents and Partners
+
+### Changed
+- Updated Georgian translation for residents description in `i18n/locales/ka.json`:
+  - Changed from "ვისი მუსიკალური პროექტებისა და იდეების განხორციელებაში ჩვენ ვაბანდებთ და ვაფინანსებთ" to "ვის მუსიკალურ პროექტებსა და იდეებში ჩვენ ვდებთ ინვესტიციას და ვუჭერთ მხარს"
+- Updated Georgian translation for partners section in `i18n/locales/ka.json`:
+  - Description: Changed "ერთად ვქმნით ერთობლივ პროექტებს" to "ვისთან ერთადაც ერთობლივ პროექტებს ვქმნით"
+  - Call to action: Changed "პარტნიორული წინადადება" to "პარტნიორობის შეთავაზება"
+- Updated section titles in Georgian (removed pronouns):
+  - "ვინ არის ის" → "ვინ არის"
+  - "ვინ არიან ისინი" → "ვინ არიან"
+  - "რას აკეთებს ის" → "რას აკეთებს"
+  - "რას აკეთებენ ისინი" → "რას აკეთებენ"
+  - "პარტნიორობა თბილისის დაბ ლაბთან" → "თანამშრომლობა Tbilisi Dub Lab-თან"
+
+### Added
+- Created `residentsData` section in both `i18n/locales/ka.json` and `i18n/locales/en.json` with full Georgian and English content for:
+  - Martokatsi (Damiane Gordeladze): Updated bio with Georgian texts including work with Gurian folklore, "ლურჯი იალქანი" band, "გორდა" ensemble, blog and brand development, and collaboration with Nice Rockers
+  - Lasha Rukhadze: Updated bio with Georgian texts including his work as traveling singer-songwriter, Teeth 'n' Tongue Jam band, "Share a Vibe" LP, collaborations with Pablo Moses, Groundation, Twinkle Brothers, Lee "Scratch" Perry, and work with Nice Rockers
+  - The Nice Rockers: Updated bio with Georgian texts describing the band as reggae and dub ensemble, their role as rhythm section, and their work with Tbilisi Dub Lab
+
+### Modified
+- Updated `app/composables/useResidents.ts` to use i18n translations from JSON files instead of hardcoded English text
+- Added `useI18n()` composable to fetch localized content dynamically based on current language
+
+### Fixed
+- Fixed JSON escaping for quotes in resident descriptions to prevent parse errors
+- Properly escaped all double quotes in Georgian and English texts using `\"`
+
+---
+
 ## [2024-12-04] - Initial Setup
 
 ### Added
