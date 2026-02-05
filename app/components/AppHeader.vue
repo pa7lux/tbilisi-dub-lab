@@ -38,7 +38,7 @@ const toggleMenu = () => {
           :class="{ active: locale === 'en' }"
           :title="$t('header.langSwitchEn')"
         >
-          🇬🇧
+          <img src="/images/icons/en.svg" alt="English" class="flag-icon" />
         </button>
         <button 
           @click="switchLocale('ka')"
@@ -46,7 +46,7 @@ const toggleMenu = () => {
           :class="{ active: locale === 'ka' }"
           :title="$t('header.langSwitchKa')"
         >
-          🇬🇪
+          <img src="/images/icons/ge.svg" alt="ქართული" class="flag-icon" />
         </button>
         <!-- <button 
           @click="toggleMenu"
@@ -122,6 +122,13 @@ const toggleMenu = () => {
 
 .flag-btn.active:hover {
   transform: none;
+}
+
+.flag-icon {
+  width: var(--flag-size);
+  height: var(--flag-size);
+  display: block;
+  border-radius: 2px;
 }
 
 /* .hamburger {
