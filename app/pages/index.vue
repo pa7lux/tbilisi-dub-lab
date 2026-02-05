@@ -3,6 +3,7 @@
     <Hero />
     <IntroSection />
     <ResidentsSection />
+    <PartnersSection />
   </div>
 </template>
 

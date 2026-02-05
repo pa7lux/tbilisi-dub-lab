@@ -1,5 +1,58 @@
 # Creation Log
 
+## [2026-02-05] - Partners Section Implementation
+
+### Added
+- **app/composables/usePartners.ts**: Composable for partners data
+  - Two partners: Irie Roots Soundsystem, Revolution Art Space
+  - Structured data with name, logo, and Instagram URL
+  - Logos from `/public/images/partners/`
+  
+- **app/components/PartnerCard.vue**: Card component for slider
+  - Partner logo with dark background (for better contrast with white logos)
+  - Partner name below logo
+  - Card is clickable link to Instagram (opens in new tab)
+  - Hover effect with lift animation
+  - PostHog tracking: `partner_card_clicked`
+  - Uses `rel="noopener noreferrer"` for security
+  
+- **app/components/PartnersSection.vue**: Main partners section
+  - Red background (`var(--color-red)`)
+  - Horizontal slider with partner cards (Swiper)
+  - Navigation arrows and pagination dots
+  - Call-to-action below slider
+  - Yellow button to open contact form (right overlay)
+  - PostHog tracking: `partner_contact_clicked`
+  - Full viewport height layout
+  - Same structure and styling as ResidentsSection
+  
+- **i18n translations**: Added `partners` section
+  - `description`: Text about partners and collaboration
+  - `callToAction`: "If you have a partnership proposal, write to us"
+  - `contactButton`: "Contact us" / "დაგვიკავშირდით"
+
+### Changed
+- **app/pages/index.vue**: Added PartnersSection after ResidentsSection
+  - Page structure: Hero → IntroSection → ResidentsSection → PartnersSection
+
+### Features
+- ✅ Horizontal slider with navigation (Swiper)
+- ✅ Partner cards link to Instagram in new tab
+- ✅ Contact form opens in right overlay on CTA button click
+- ✅ Responsive design for all screen sizes
+- ✅ PostHog analytics tracking
+- ✅ Full i18n support for all text
+- ✅ CSS variables for all sizes and colors
+
+### Result
+- Complete partners section matching requirements
+- Interactive slider with partner logos
+- Direct links to partner Instagram profiles
+- Contact form integration for partnership inquiries
+- Fully responsive and accessible design
+
+---
+
 ## [2026-02-04] - Residents Section Implementation
 
 ### Added

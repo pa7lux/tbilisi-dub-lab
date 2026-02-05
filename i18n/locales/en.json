@@ -79,6 +79,11 @@
     "whatHeDoes": "What he does",
     "whatTheyDo": "What they do",
     "partnership": "Partnership with Tbilisi Dub Lab"
+  },
+  "partners": {
+    "description": "Partners are those we collaborate with regularly and create joint projects together.",
+    "callToAction": "If you have a partnership proposal, write to us.",
+    "contactButton": "Contact us"
   }
 }
 
