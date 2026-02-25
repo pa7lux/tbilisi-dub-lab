@@ -2,7 +2,7 @@
   <div class="home-page">
     <Hero />
     <IntroSection />
-    <ResidentsSection />
+    <!-- <ResidentsSection /> -->
     <PartnersSection />
   </div>
 </template>
