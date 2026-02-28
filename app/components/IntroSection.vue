@@ -38,13 +38,22 @@ const closeContact = () => {
     <div class="intro-content">
       <div class="intro-text">
         <p>{{ $t('intro.paragraph1') }}</p>
+        <div class="intro-list">
+          <p class="intro-list__title">{{ $t('intro.listTitle') }}</p>
+          <ul>
+            <li>{{ $t('intro.listItem1') }}</li>
+            <li>{{ $t('intro.listItem2') }}</li>
+            <li>{{ $t('intro.listItem3') }}</li>
+            <li>{{ $t('intro.listItem4') }}</li>
+          </ul>
+        </div>
         <p>{{ $t('intro.paragraph2') }}</p>
       </div>
       
       <div class="intro-buttons">
-        <button @click="openDonate" class="intro-btn intro-btn--green">
+        <!-- <button @click="openDonate" class="intro-btn intro-btn--green">
           {{ $t('intro.donateText') }}
-        </button>
+        </button> -->
         <button @click="openContact" class="intro-btn intro-btn--yellow">
           {{ $t('intro.contactText') }}
         </button>
@@ -132,6 +141,49 @@ const closeContact = () => {
 
 .intro-text p:last-child {
   margin-bottom: 0;
+}
+
+.intro-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.intro-list__title {
+  font-family: var(--font-body);
+  font-size: var(--text-font-size);
+  line-height: var(--text-line-height);
+  color: var(--text-color);
+  margin: 0;
+  font-weight: normal;
+}
+
+.intro-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.intro-list ul li {
+  font-family: var(--font-body);
+  font-size: var(--text-font-size);
+  line-height: var(--text-line-height);
+  color: var(--text-color);
+  font-weight: normal;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.intro-list ul li::before {
+  content: '✦';
+  font-size: 0.5em;
+  flex-shrink: 0;
+  /* center symbol to the first line of text */
+  margin-top: 0.75em;
 }
 
 .intro-buttons {

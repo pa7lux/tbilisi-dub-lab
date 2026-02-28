@@ -21,8 +21,13 @@
     "logo": "Tbilisi Dub Lab"
   },
   "intro": {
-    "paragraph1": "We are non-profit community who are eager to create the environment where reggae, dub and roots culture in Georgia can grow, connect and sound louder.",
-    "paragraph2": "We have launched a Dub Fund to support musicians. We have a team of producers who help to prepare releases. And we are opened for new residents and partners.",
+    "paragraph1": "Tbilisi Dub Lab is a production and media hub shaping contemporary dub culture from Tbilisi. Dub Lab develops strong releases and meaningful cultural projects built on long-term vision and focused collaboration.",
+    "listTitle": "Our work includes:",
+    "listItem1": "music production and artist development",
+    "listItem2": "release strategy and catalogue growth",
+    "listItem3": "editorial storytelling and media projects",
+    "listItem4": "cross-cultural collaborations",
+    "paragraph2": "By combining production and media, we create not only tracks — but context, visibility, and lasting cultural presence.",
     "donateText": "donate",
     "donateUrl": "#donate",
     "contactText": "contact",
