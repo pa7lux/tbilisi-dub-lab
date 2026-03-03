@@ -1,5 +1,25 @@
 # Creation Log
 
+## [2026-03-03] - Fixed Language Switcher Conflicts with URL Strategy
+
+### Problem
+Language switcher behaved incorrectly: `useLocaleStorage` composable was overriding the URL-based locale from `localStorage`, conflicting with the `prefix_except_default` i18n strategy where the URL is the source of truth.
+
+### Root Cause
+1. `useLocaleStorage` read a saved locale from `localStorage` and called `setLocale()` to override the URL locale — this broke shared `/ka/` links (redirecting Georgian URLs to English if the visitor had `en` stored)
+2. PostHog `from_language` was captured after `setLocale()` already changed `locale.value`, resulting in identical `from` and `to` values
+3. localStorage persistence was duplicated between `AppHeader` and `useLocaleStorage`
+
+### Solution
+1. **`useLocaleStorage.ts`**: Removed URL-overriding logic; now syncs storage to match URL locale (URL is the source of truth) and watches for changes via `watch(locale, ...)`
+2. **`AppHeader.vue`**: Captures `from_language` before calling `setLocale()`; removed duplicate localStorage/cookie persistence (now handled by `useLocaleStorage` watcher); added early return if clicking the already-active locale
+
+### Files Modified
+- `app/composables/useLocaleStorage.ts`
+- `app/components/AppHeader.vue`
+
+---
+
 ## [2026-02-05] - Partners Section Implementation
 
 ### Added
